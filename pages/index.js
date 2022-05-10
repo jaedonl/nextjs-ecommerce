@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Featured from "../components/Featured";
-// import PizzaList from "../components/PizzaList";
+import PizzaList from "../components/PizzaList";
 import styles from '../styles/Home.module.scss'
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
       </Head>
 
       <Featured/>
-      {/* <PizzaList/> */}
+      <PizzaList/>
     </div>
   )
 }

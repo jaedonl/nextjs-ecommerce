@@ -1,5 +1,5 @@
 .container {
-  height: calc(100vh - 100px);
+  height: calc(60vh - 100px);
   background-color: #d1411e;
   overflow: hidden;
   position: relative;
@@ -8,7 +8,7 @@
 .arrowContainer {
   position: absolute;
   width: 10%;
-  height: 20%;
+  height: 15%;
   top: 0;
   bottom: 0;
   margin: auto;
@@ -20,7 +20,7 @@
   width: 300vw;
   height: 100%;
   display: flex;
-  transition: all 1.5s ease-in-out ;
+  transition: all .5s ease-in-out;  
 }
 
 .imgContainer {
