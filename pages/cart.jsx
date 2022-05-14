@@ -14,7 +14,7 @@ const Cart = () => {
     const cart = useSelector(state => state.cart)
     const router = useRouter()
 
-    const amount = "2";
+    const amount = cart.total;
     const currency = "USD";
     const style = {"layout":"vertical"};
 
@@ -78,7 +78,7 @@ const Cart = () => {
                     const shipping = details.purchase_units[0].shipping;
                     createOrder({ 
                         customer: shipping.name.full_name, 
-                        address: shippingaddress.address_line_1,
+                        address: shipping.address.address_line_1,
                         total: cart.total,
                         method: 1,
                     })
