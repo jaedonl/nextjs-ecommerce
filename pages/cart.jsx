@@ -6,13 +6,16 @@ import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from "@pa
 import axios from "axios";
 import { useRouter } from "next/router";
 import { reset } from "../redux/cartSlice";
+import OrderDetail from "../components/OrderDetail";
 
 
 const Cart = () => {
-    const [open, setOpen] = useState(false)
-    const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
-    const router = useRouter()
+    const dispatch = useDispatch()    
+    const router = useRouter() 
+    
+    const [open, setOpen] = useState(false)
+    const [cash, setCash] = useState(false)    
 
     const amount = cart.total;
     const currency = "USD";
@@ -21,12 +24,11 @@ const Cart = () => {
 
     const createOrder = async (data) => {
         try {
-            const res = axios.post("http://localhost:3000/api/orders", data);
+            const res = await axios.post("http://localhost:3000/api/orders", data);
             if (res.status === 201) {
                 dispatch(reset())
-                router.push("/orders/" + res.data.id); 
+                router.push(`/orders/${res.data._id}`); 
             }            
-
         } catch (error) {
             console.log(error);
         }
@@ -93,7 +95,7 @@ const Cart = () => {
         <div className={styles.container}>
             <div className={styles.left}>
                 <table className={styles.table}>
-                    <tbody>
+                    <thead>
                         <tr className={styles.trTitle}>
                             <th>Product</th>
                             <th>Name</th>
@@ -102,7 +104,7 @@ const Cart = () => {
                             <th>Quantity</th>
                             <th>Total</th>
                         </tr>
-                    </tbody>
+                    </thead>
                     <tbody>
                         {cart.products.map((product, idx) => (
                             <tr className={styles.tr} key={product._id}>
@@ -169,7 +171,10 @@ const Cart = () => {
                         <button type="button" className={styles.button} onClick={()=>setOpen(true)}>CHECKOUT</button>  
                     )}                    
                 </div> 
-            </div>        
+            </div>     
+            {cash && (
+                <OrderDetail total={cart.total} createOrder={createOrder} />
+            )}
         </div>
     ) 
 }
