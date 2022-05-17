@@ -1,11 +1,16 @@
+import { useState } from 'react'
 import axios from 'axios';
 import Head from 'next/head'
 import Image from 'next/image'
 import Featured from "../components/Featured";
 import PizzaList from "../components/PizzaList";
 import styles from '../styles/Home.module.scss'
+import AddButton from '../components/AddButton';
+import Add from '../components/Add';
 
 export default function Home({ pizzaList, admin }) {
+  const [close, setClose] = useState(true)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,8 +20,10 @@ export default function Home({ pizzaList, admin }) {
       </Head>
 
       <Featured/>
-      {admin && <span>Hello</span>}
+      {admin && <AddButton setClose={setClose} />}
       <PizzaList pizzaList={pizzaList} />
+
+      {!close && <Add setClose={setClose} />}
     </div>
   )
 }
