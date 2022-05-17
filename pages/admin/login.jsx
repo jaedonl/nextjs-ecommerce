@@ -14,8 +14,8 @@ const Login = () => {
             await axios.post("http://localhost:3000/api/login", {
                 username,
                 password,
-            })
-            router.push("/admin")
+            }) 
+            router.push("/admin");
         } catch (error) {
             setError(true)
         }

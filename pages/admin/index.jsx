@@ -108,8 +108,8 @@ const Index = ({ orders, products }) => {
         </div>
     )
 }
-export const getServerSideProps = async (ctx) => {
-    const myCookie = ctx.req?.cookie || ""
+export const getServerSideProps = async (context) => {
+    const myCookie = context.req?.cookies || ""
 
     if (myCookie.token !== process.env.TOKEN) {
         return {
